@@ -90,7 +90,7 @@ results = dmc.Paper(
             dmc.Divider(),
             dmc.Group(
                 [
-                    dmc.Text('Approximate area : ',fw=500,size='sm'),
+                    dmc.Text('Approximate Area : ',fw=500,size='sm'),
                     dmc.Text(id='result-area',size='sm')
                 ],
                 gap=5
@@ -134,7 +134,7 @@ results = dmc.Paper(
                         leftSection=DashIconify(icon='ant-design:clear-outlined',width=20),
                         n_clicks=0,
                         size='xs',
-                        h=50
+                        h=40
                     ),
                     dmc.Button(
                         'Download .csv',
@@ -145,7 +145,7 @@ results = dmc.Paper(
                         n_clicks=0,
                         size='xs',
                         color='blue',
-                        h=50
+                        h=40
                     ),
                 ],
                 cols=2
@@ -171,7 +171,7 @@ boundary_options_enabled = [
                 leftSection=DashIconify(icon='ph:bounding-box-light',width=20),
                 n_clicks=0,
                 size='xs',
-                h=50
+                h=40
             ),
             dmc.Button(
                 'Create Polygon',
@@ -182,7 +182,7 @@ boundary_options_enabled = [
                 n_clicks=0,
                 size='xs',
                 color='indigo',
-                h=50
+                h=40
             ),
         ],
         cols=2
@@ -199,7 +199,7 @@ boundary_options_cancel = dmc.Stack(
             leftSection=DashIconify(icon='material-symbols:cancel',width=20),
             n_clicks=0,
             size='xs',
-            h=50,
+            h=40,
             color='orange'
         ),
         dmc.Text('Draw boundary on the map')
@@ -216,7 +216,7 @@ boundary_options_disabled = [
         size='xs',
         fullWidth=True,
         id='delete-boundary',
-        h=50
+        h=40
     )
 ]
 
@@ -239,7 +239,7 @@ input_boundary = dmc.Paper(
             ),
             dmc.Group(
                 [
-                    dmc.Text('Approximate area : ',fw=500,size='sm'),
+                    dmc.Text('Approximate Area : ',fw=500,size='sm'),
                     dmc.Text(id='area',size='sm')
                 ],
                 justify='left',
@@ -354,7 +354,7 @@ button = dmc.Flex(
         leftSection=DashIconify(icon='mdi:gear',width=20),
         radius='xl',
         n_clicks=0,
-        h=50
+        h=40
     ),
     justify='flex-end',
 )
@@ -466,31 +466,37 @@ layout = dmc.Group(
             dmc.Stack(
                 [
                     credit,
-                    dmc.Stack(
+                    dmc.ScrollArea(
                         [
-                            input_boundary,
                             dmc.Stack(
                                 [
-                                    input_params,
-                                    button
-                                    
+                                    input_boundary,
+                                    dmc.Stack(
+                                        [
+                                            input_params,
+                                            button
+                                            
+                                        ],
+                                        id='params',
+                                        display='none'
+                                    ),
                                 ],
-                                id='params',
-                                display='none'
+                                id='input-params'
                             ),
+                            dmc.Group(
+                                results,
+                                display='none',
+                                id='result-container'
+                            )
                         ],
-                        id='input-params'
-                    ),
-                    dmc.Group(
-                        results,
-                        display='none',
-                        id='result-container'
+                        h='82vh',
+                        type='never'
                     )
                 ],
             ),
             position={'top':20,'right':20},
             zIndex=1000,
-            style={'zoom':'85%'}
+            h='90vh',
         ),
     ],
     gap=0,

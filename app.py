@@ -17,10 +17,13 @@ stylesheets = [
 
 server = Flask(__name__)
 app = dash.Dash(
-    __name__, server=server, suppress_callback_exceptions=True, external_stylesheets=stylesheets, update_title=None
+    __name__, server=server, suppress_callback_exceptions=True, external_stylesheets=stylesheets, update_title=None,#requests_pathname_prefix='/surveyplanner/'
 )
 
-app.title = 'Geophysics'
+# app.scripts.config.serve_locally = True
+# app.css.config.serve_locally = True
+
+app.title = 'Survey Planner v0.01'
 
 app.index_string = '''
 <!DOCTYPE html>
@@ -58,6 +61,6 @@ app.layout = dmc.MantineProvider(
 )
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
     
 
