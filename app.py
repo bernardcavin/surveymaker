@@ -1,8 +1,6 @@
-import os
 from flask import Flask
-
 import dash
-from dash import dcc, html, Input, Output, State
+from dash import dcc, html
 import dash_mantine_components as dmc
 import surveyplanner
 

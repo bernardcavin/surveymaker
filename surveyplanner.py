@@ -2,13 +2,23 @@ import dash_leaflet as dl
 import dash_mantine_components as dmc
 from dash import dcc, html, Input, Output, State, callback, clientside_callback, exceptions, no_update
 from dash_iconify import DashIconify
-import numpy as np
 from shapely.geometry import shape, Point, Polygon
 from shapely.affinity import rotate
 from pyproj import Transformer, CRS
 from geojson import Feature, FeatureCollection, Point as GeoJsonPoint
 from dash_extensions.javascript import assign
 import requests
+
+def arange(start, stop=None, step=1):
+    if stop is None:
+        stop = start
+        start = 0
+    result = []
+    current = start
+    while current < stop:
+        result.append(current)
+        current += step
+    return result
 
 credit = dmc.Paper(
     dmc.Group(
@@ -513,8 +523,8 @@ def generate_grid_points(geojson_data, grid_spacing_meters, orientation_deg, pre
     rotated_polygon_utm = rotate(polygon_utm, orientation_deg, origin=polygon_utm.centroid)
     min_x, min_y, max_x, max_y = rotated_polygon_utm.bounds
 
-    x_coords = np.arange(min_x, max_x + grid_spacing_meters, grid_spacing_meters)
-    y_coords = np.arange(min_y, max_y + grid_spacing_meters, grid_spacing_meters)
+    x_coords = arange(min_x, max_x + grid_spacing_meters, grid_spacing_meters)
+    y_coords = arange(min_y, max_y + grid_spacing_meters, grid_spacing_meters)
     grid_points = [Point(x, y) for x in x_coords for y in y_coords]
 
     centroid_utm = polygon_utm.centroid
@@ -794,9 +804,3 @@ clientside_callback(
     Input("edit_control", "geojson"),
     prevent_initial_call=True
 )
-
-
-
-
-
-
