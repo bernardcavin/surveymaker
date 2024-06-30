@@ -1,0 +1,48 @@
+.leaflet-draw {
+    visibility: hidden;
+}
+
+.leaflet-interactive {
+  cursor: default !important;
+}
+
+.leaflet-container {
+  cursor: default !important;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+  }
+  
+  #map .leaflet-div-icon {
+    width:0;
+    height:0;
+    border: 0;
+    padding: 0;
+  }
+  
+  #map .leaflet-div-icon b {
+    display:inline-block;
+    padding: 3px;
+    border: 1px solid #666;
+    border-radius: 3px;
+    background:#fff;
+    transform:translate(-50%, -50%);
+  }
+
+.station_table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 5px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+}
