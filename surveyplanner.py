@@ -466,7 +466,7 @@ layout = dmc.Group(
             dmc.Stack(
                 [
                     credit,
-                    dmc.ScrollArea(
+                    html.Div(
                         [
                             dmc.Stack(
                                 [
@@ -486,17 +486,17 @@ layout = dmc.Group(
                             dmc.Group(
                                 results,
                                 display='none',
-                                id='result-container'
+                                id='result-container',
                             )
                         ],
-                        h='82vh',
-                        type='never'
+                        style={'max-height':'82vh','overflow-y':'auto'},
+                        className='scrollbarhide'
                     )
                 ],
             ),
             position={'top':20,'right':20},
             zIndex=1000,
-            h='90vh',
+            style={'max-height':'90vh'}
         ),
     ],
     gap=0,
@@ -632,7 +632,7 @@ def generate_points(n,current_geojson,spacing,unit,orientation, prefix, area):
             output, num_points, avg_elevation, max_elevation, min_elevation  = generate_grid_points(current_geojson,spacing,orientation,prefix)
             return output, False, False, no_update, area, num_points, avg_elevation, max_elevation, min_elevation, 'none', None
         except:
-            return no_update, False, True, no_update
+            return no_update, False, True, no_update, no_update, no_update, no_update, no_update,no_update,no_update,no_update
     else:
         raise exceptions.PreventUpdate()
 
@@ -723,7 +723,6 @@ clientside_callback(
     function(n,spacing) {
         if (n>0) {
             if (!['',null,undefined].includes(spacing)) {
-                console.log(spacing);
                 return true
             }
         }
@@ -763,7 +762,7 @@ def update_draw_toolbar(n):
 )
 def update_draw_toolbar_polygon(n):
     if n:
-        return {"mode": "polygon", "n_clicks": n}, boundary_options_cancel
+        return {"mode": "polygon"}, boundary_options_cancel
     return no_update
 
 @callback(
@@ -774,7 +773,7 @@ def update_draw_toolbar_polygon(n):
 )
 def update_draw_toolbar_rectangle(n):
     if n:
-        return {"mode": "rectangle", "n_clicks": n}, boundary_options_cancel
+        return {"mode": "rectangle"}, boundary_options_cancel
     return no_update
 
 clientside_callback(

@@ -46,3 +46,15 @@
     background-color: #dddddd;
   }
 }
+
+.scrollbarhide::-webkit-scrollbar { 
+  width: 0 !important 
+}
+
+.scrollbarhide { 
+  overflow: -moz-scrollbars-none; 
+}
+
+.scrollbarhide { 
+  -ms-overflow-style: none; 
+}
